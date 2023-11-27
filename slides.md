@@ -867,12 +867,123 @@ Player: Stephen Curry, Team: Warriors, PPG: 30<br>
 
 # Form Handling Example
 
+_index.php_
+
+```html
+<body>
+ <form id="myForm" action="myform.php" method="post">
+        <label for="userNameInput">User name:</label>
+        <input type="text" id="userNameInput" name="uname">
+        <label for="emailInput">E-mail:</label>
+        <input type="email" id="emailInput" name="email">
+        <label for="passwordInput">Password:</label>
+        <input type="password" id="passwordInput" name="pw">
+        <input type="submit" value="signup">
+ </form>
+</body>
+```
+
+_myform.php_
+
+
+```html
+<body>
+<p>Thank you, <?php echo $_POST["uname"]?>, for signing up!</p>
+<p> Please check your email: <?php echo $_POST["email"] ?> 
+to complete registration and confirm your email</p>
+</body>
+```
 
 ---
 
 # Form Validation
+- Input elements in HTML forms should be validated both on client and server sides.
+- Client–side validation is done using JavaScript
+  - Provide better user experience/feedback to the user
+  - Users can see errors immediately as they enter the form
+  - But you should not rely or trust client-side validation
+  - Client-side validation can be easily bypassed and manipulated 
+- Server-side validation must be always done for all forms
+  - Perform input validation and sanitization on the server to protect against malicious data (e.g., SQL injection).
+  - More on SQL injection next.
+
+---
+
+# Form Validation (client-side)
+
+- Using the HTML validation attributes: `type` and `required`
+
+```html
+Email: <input type="text" type="email" name="email" required>
+```
+
+- Or using JavaScript
+
+```javascript
+var uname = document.forms["myForm"]["username"].value;
+  if (uname && uname.trim() == "") {
+     document.getElementById("errorSection").innerText= "username is required";
+     return false;
+  }
+
+```
+
+---
+
+# Form Validation (server-side I)
+
+```php
+<?php 
+// Clean the input (remove whitespaces 
+// and strip unnecessary characters.)
+$email = trim($_POST["email"]);
+$email = stripslashes($email);
+$email = htmlspecialchars($email);
+ 
+// Validate the input
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  echo "Valid email address."; 
+} else{
+    echo "Invalid email address.";
+}
+
+```
+
+---
+
+# Form Validation (server-side II)
+
+- Forms may be validated using PHP built-in functions:
+  - filter_var() uses a set of predefined filters
+  - preg_match() performs regular expression matching
+- Third-party libraries are also available
+  - Example: https://github.com/Respect/Validation
+  - In most cases, it is better to use a library that has been rigorously tested in the wild than writing your own regular expressions.
 
 
+---
+
+# What is SQL Injection
+
+https://xkcd.com/327/
+
+![](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
+
+- SQL Injection is a code injection technique that attackers use to insert malicious SQL code into input fields to get the application to perform unintended actions.
+- This can allow the attacker to view, modify, and delete data in the database.
+- The attacker provides input that causes the application to generate an SQL query with unintended commands.
+- This can occur when user input is incorrectly filtered or parameterized.
+
+---
+
+# Prevention of SQL Injection
+
+- Always sanitize and validate any user input before executing SQL code.
+- Use parameterized queries or prepared statements to ensure that user input is not treated as part of the SQL command.
+- Use automated tools to test for SQL injection vulnerabilities.
+
+---
+layout: section
 ---
 
 # PHP MySQL 
@@ -891,19 +1002,32 @@ Create, Read, Update, and Delete (CRUD)
 - The client application sends requests to create, retrieve, update, and delete items
 - The server-side code will handle all CRUD requests using PHP and communicates with our MySQL database and returns html to the client.
 
-
 ---
 
-# Warning
+# Demo: Creating a To Do List Web App
 
-### Embedding PHP in HTML is bad!!
+https://gitlab.com/kalharbi/todo-php-mysql
+
+
+---
+layout: two-cols-header
+---
+# Embedding PHP in HTML is bad!!
+
+::left::
+
 - It breaks the fundamental concept of “separation of concerns”.
 - Server logic should not be mixed with presentation code (HTML)
 - This example is only for demonstration purposes.
 - What we should do instead is have our PHP server code communicates with the database and return JSON to the client.
 - We will see this right after this demo.
 
+::right::
+
+![](/images/warning.jpg)
 
 ---
 
-# Creating a To Do List Web App
+# Working with APIs
+
+- Coming up next!
