@@ -951,6 +951,105 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 ---
 
+# Cookies
+
+- Cookies are small files that are stored on a user's computer. 
+- They are designed to store a small amount of data on a user's computer.
+- In PHP, cookies can be set using the `setcookie()` function.
+- The `setcookie()` function must appear BEFORE the `<html>` tag.
+- Syntax: `setcookie(name, value, expire, path, domain, secure, httponly);`
+- To retrieve a cookie value, you can use the `$_COOKIE` superglobal variable. For example, `$_COOKIE["name"]`.
+- Cookies are part of the HTTP header, so `setcookie()` must be called before any output is sent to the browser.
+- Cookies can be deleted by setting expiration date in the past.
+
+---
+
+# Common Usages of Cookies in PHP
+
+- **Session Management**: Cookies are often used to track user sessions. This allows the server to remember the state of a user's interaction with the website over multiple requests.
+
+- **Personalization**: Cookies can be used to remember user preferences, such as language, theme, or other settings. This allows the website to provide a personalized experience for the user.
+
+- **Tracking**: Cookies can be used to track user behavior on a website. This information can be used for analytics, advertising, or to provide recommendations.
+
+- **Authentication**: Cookies can be used to remember a user's login information, allowing them to stay logged in over multiple sessions.
+
+
+---
+
+# Cookies example
+
+```php
+<?php
+// Setting a cookie in PHP secure (HTTPS) and httponly
+setcookie("language", "arabic", time() + (86400 * 30), "/", true, true); // 86400 = 1 day
+
+// Checking if the cookie is set and retrieving its value
+if(isset($_COOKIE["language"])) {
+    echo "Value of 'language' cookie is: " . $_COOKIE["language"];
+} else {
+    echo "'language' cookie is not set";
+}
+?>
+
+```
+
+# Deleting a cookie
+
+To delete a cookie, you can set the cookie with a past expiration date in seconds
+
+```php
+setcookie("test_cookie", "", time() - 3600, "/");
+```
+
+---
+
+# Session Management
+
+- Sessions are a way to store information (in variables) to be used across multiple pages.
+- Unlike a cookie, the information is not stored on the users' computer.
+- Session variables hold information about a single user and are available to all pages in your application.
+- To start a session in PHP, use the `session_start()` function. 
+  - This function must be the very line of your code before any HTML tags.
+- PHP automatically generates a unique session ID for each visitor.
+- We can store data in the session by setting the `$_SESSION` superglobal array.
+- To destroy a session in PHP, use the `session_destroy()` function.
+- Sessions are more secure than cookies as the data is stored on the server.
+- However, session data is temporary and will be deleted after the user has left the website or after a certain period of inactivity or the server is rebooted.
+
+---
+
+# Session Example
+
+```php
+<?php
+// Start the session
+session_start();
+
+// Set session variables
+$_SESSION["username"] = "Ali";
+$_SESSION["email"] = "ali@example.com";
+
+// Access session variables
+echo "Username is: " . $_SESSION["username"] . "<br>";
+echo "Email is: " . $_SESSION["email"];
+?>
+```
+
+# Destroying Session
+
+```php
+<?php
+// Start or resume the session
+session_start();
+
+// Destroy the session
+session_destroy();
+?>
+```
+
+---
+
 # Form Validation (server-side II)
 
 - Forms may be validated using PHP built-in functions:
@@ -992,6 +1091,7 @@ layout: section
 Create, Read, Update, and Delete (CRUD)
 
 
+
 ---
 
 # Creating a CRUD Web App in PHP
@@ -1001,6 +1101,34 @@ Create, Read, Update, and Delete (CRUD)
 - The server-side code will make a connection to the database server
 - The client application sends requests to create, retrieve, update, and delete items
 - The server-side code will handle all CRUD requests using PHP and communicates with our MySQL database and returns html to the client.
+
+---
+
+# MariaDB Database installation
+
+### Windows
+- Download the MariaDB MSI package from the [official MariaDB website](https://mariadb.org/download/) and follow the instructions in the installation wizard.
+- If MariaDB was installed with the MSI package, it should have been configured to start automatically with Windows.
+
+### macOS
+- Use Homebrew: Run `brew install mariadb` in the terminal.
+- Start MariaDB server with `brew services start mariadb`.
+
+### Linux
+- Use the package manager for your distribution. For example, on Ubuntu, you can use `sudo apt-get install mariadb-server`.
+- Start the MariaDB service with `sudo systemctl start mariadb`.
+
+
+---
+
+# Connect to MariaDB from Terminal
+
+
+- Open command-line client (Command Prompt or PowerShell on Windows or Terminal application on macOS and Linux).
+- Run the command: `mysql -u username -p`
+- Replace `username` with your MariaDB username.
+- You'll be prompted to enter your password.
+
 
 ---
 
@@ -1028,6 +1156,11 @@ layout: two-cols-header
 
 ---
 
+
 # Working with APIs
 
 - Coming up next!
+
+
+---
+
