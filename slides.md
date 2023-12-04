@@ -932,22 +932,56 @@ var uname = document.forms["myForm"]["username"].value;
 
 # Form Validation (server-side I)
 
+- Validation ensure the email is in a valid format. 
+- Sanitization ensures the email cleans the bad characters out of the email.
+  - Sanitization can be done using the built in `FILTER_SANITIZE_EMAIL` constant or you write your own code to remove white spaces and strip any invalid characters.
+
 ```php
+
 <?php 
-// Clean the input (remove whitespaces 
-// and strip unnecessary characters.)
-$email = trim($_POST["email"]);
-$email = stripslashes($email);
-$email = htmlspecialchars($email);
+$clean_email = filter_var($email, FILTER_SANITIZE_EMAIL);
  
 // Validate the input
-if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (filter_var($clean_email, FILTER_VALIDATE_EMAIL)) {
   echo "Valid email address."; 
 } else{
     echo "Invalid email address.";
 }
 
 ```
+
+---
+
+# Form Validation (server-side II)
+
+- Forms may be validated using PHP built-in functions:
+  - `filter_var()` uses a set of predefined filters
+  - `preg_match()` performs regular expression matching
+- Third-party libraries are also available
+  - Example: https://github.com/Respect/Validation
+  - In most cases, it is better to use a library that has been rigorously tested in the wild than writing your own regular expressions.
+
+
+---
+
+# What is SQL Injection
+
+https://xkcd.com/327/
+
+![](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
+
+- SQL Injection is a code injection technique that attackers use to insert malicious SQL code into input fields to get the application to perform unintended actions.
+- This can allow the attacker to view, modify, and delete data in the database.
+- The attacker provides input that causes the application to generate an SQL query with unintended commands.
+- This can occur when user input is incorrectly filtered or parameterized.
+
+---
+
+# Prevention of SQL Injection
+
+- Always sanitize and validate any user input before executing SQL code.
+- Use parameterized queries or prepared statements to ensure that user input is not treated as part of the SQL command.
+- Use automated tools to test for SQL injection vulnerabilities.
 
 ---
 
@@ -999,7 +1033,7 @@ if(isset($_COOKIE["language"])) {
 To delete a cookie, you can set the cookie with a past expiration date in seconds
 
 ```php
-setcookie("test_cookie", "", time() - 3600, "/");
+setcookie("language", "", time() - 3600, "/");
 ```
 
 ---
@@ -1047,39 +1081,6 @@ session_start();
 session_destroy();
 ?>
 ```
-
----
-
-# Form Validation (server-side II)
-
-- Forms may be validated using PHP built-in functions:
-  - filter_var() uses a set of predefined filters
-  - preg_match() performs regular expression matching
-- Third-party libraries are also available
-  - Example: https://github.com/Respect/Validation
-  - In most cases, it is better to use a library that has been rigorously tested in the wild than writing your own regular expressions.
-
-
----
-
-# What is SQL Injection
-
-https://xkcd.com/327/
-
-![](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
-
-- SQL Injection is a code injection technique that attackers use to insert malicious SQL code into input fields to get the application to perform unintended actions.
-- This can allow the attacker to view, modify, and delete data in the database.
-- The attacker provides input that causes the application to generate an SQL query with unintended commands.
-- This can occur when user input is incorrectly filtered or parameterized.
-
----
-
-# Prevention of SQL Injection
-
-- Always sanitize and validate any user input before executing SQL code.
-- Use parameterized queries or prepared statements to ensure that user input is not treated as part of the SQL command.
-- Use automated tools to test for SQL injection vulnerabilities.
 
 ---
 layout: section
@@ -1159,7 +1160,11 @@ layout: two-cols-header
 
 # Working with APIs
 
-- Coming up next!
+### Create a CRUD REST API with PHP & MariaDB
+- Below is a video tutorial on how to create a RESTful API in PHP for a simple ToDo application. 
+- [Link to the complete source code](https://gitlab.com/cpit405/php-mysql-rest-api)
+
+<Youtube id="lxHNsXudkrY" />
 
 
 ---
