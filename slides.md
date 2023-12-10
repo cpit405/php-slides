@@ -98,7 +98,7 @@ Last update: Fall 2023 &copy; Khalid Alharbi, Ph.D.
 
 Below is a video tutorial on how to install PHP on Windows 11, configure the PATH environment variable, and run PHP from the *Command Prompt (CMD)/PowerShell*.
 
-<Youtube id="l-74L_8L3CU" />
+<Youtube id="l-74L_8L3CU" width="100%" height="70%"/>
 
 ---
 
@@ -1119,7 +1119,6 @@ Create, Read, Update, and Delete (CRUD)
 - Use the package manager for your distribution. For example, on Ubuntu, you can use `sudo apt-get install mariadb-server`.
 - Start the MariaDB service with `sudo systemctl start mariadb`.
 
-
 ---
 
 # Connect to MariaDB from Terminal
@@ -1130,7 +1129,164 @@ Create, Read, Update, and Delete (CRUD)
 - Replace `username` with your MariaDB username.
 - You'll be prompted to enter your password.
 
+- It supports prepared statements which can help prevent SQL injection attacks.
 
+---
+
+# Create the Database
+
+```sql
+CREATE DATABASE todo_db;
+USE todo_db;
+CREATE TABLE tasks(
+    id MEDIUMINT NOT NULL AUTO_INCREMENT, 
+    task VARCHAR(255) NOT NULL, 
+    date_added DATETIME NOT NULL,
+    done BOOLEAN NOT NULL DEFAULT false,
+    PRIMARY KEY (id)
+    );
+INSERT INTO tasks(task, date_added) VALUES ('Workout', NOW());
+INSERT INTO tasks(task, date_added) VALUES ('Water the plants', NOW());
+INSERT INTO tasks(task, date_added) VALUES ('Call Mom', NOW());
+
+```
+
+---
+
+# PHP PDO
+
+- PDO (PHP Data Objects) is a database abstraction layer for PHP.
+- The PDO class represents a connection between PHP and a database server.
+- PDO has the following benefits:
+  - **Flexibility:** PDO works with almost any database (MySQL, PostgreSQL, etc.) as long as we install the PDO driver for the chosen database.
+    - Each database driver that implements the PDO interface can expose database-specific features. 
+  - **Consistency:** PDO provides a consistent interface in an object-oriented way to data access.
+  - **Security:** PDO supports prepared statements, which provide protection against SQL injection attacks as well as better SQL execution performance.
+  - **Error handling:** Improved error reporting and exception handling.
+
+---
+
+# Connect to the database
+- Connections are established by creating instances of the PDO class.
+- The constructor accepts parameters for specifying the database source (known as the dsn) and optionally for the username and password.
+
+```php
+function db_connection($host, $port, $dbname, $username, $password)
+{
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname";
+    try {
+        // Create a PDO connection object and connect to the database
+        $conn = new PDO($dsn, $username, $password);
+        // throw exceptions whenever a database error occurs. 
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connected successfully";
+        return $conn;
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+}
+```
+
+---
+
+
+# Insert Data
+
+
+```php
+<?php 
+function insert_todo($todo_task, $todo_date)
+{
+    $sql_query = "INSERT INTO tasks (task, date_added, done) VALUES(:task_value, :date_value, DEFAULT)";
+    $todo_date = date("Y-m-d H:i:s", strtotime($todo_date));
+    $stmt = $GLOBALS["conn"]->prepare($sql_query);
+    if ($stmt) {
+        // bind parameters in the prepared statement to the values
+        $stmt->bindParam("task_value", $todo_task, PDO::PARAM_STR);
+        $stmt->bindParam("date_value", $todo_date, PDO::PARAM_STR);
+
+        // execute the prepared statement
+        $stmt->execute();
+        // check if it was successful (the affected rows should be 1)
+        if ($stmt->rowCount() == 1) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: failed to insert the new record";
+        }
+    }
+}
+?>
+```
+
+---
+
+# Select Data
+
+```php
+function select_all_todos()
+{
+    $sql_query = "SELECT * FROM tasks";
+    $stmt = $GLOBALS["conn"]->prepare($sql_query);
+    if ($stmt) {
+        // execute the prepared statement
+        $stmt->execute();
+        // fetch the result
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // return the result
+        return $result;
+    }
+}
+```
+
+---
+
+# Update Data
+
+
+```php
+function update_todo($todo_id, $todo_description, $todo_date, $todo_done){
+    $sql_query = "UPDATE tasks SET task = :task_value, date_added = :date_value, done = :done_value WHERE id = :id_value";
+    $todo_date = date("Y-m-d H:i:s", strtotime($todo_date));
+    $stmt = $GLOBALS["conn"]->prepare($sql_query);
+    if ($stmt) {
+        $stmt->bindParam("id_value", $todo_id, PDO::PARAM_INT);
+        $stmt->bindParam("task_value", $todo_description, PDO::PARAM_STR);
+        $stmt->bindParam("date_value", $todo_date, PDO::PARAM_STR);
+        $stmt->bindParam("done_value", $todo_done, PDO::PARAM_INT);
+        $stmt->execute();
+        // check if the record was updated
+        if ($stmt->rowCount() == 1) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error: failed to update the record";
+        }
+    }
+}
+```
+
+---
+
+# Delete Data
+
+```php
+
+function delete_todo($todo_id)
+{
+    $sql_query = "DELETE FROM tasks WHERE id = :id_value";
+    $stmt = $GLOBALS["conn"]->prepare($sql_query);
+    if ($stmt) {
+        $stmt->bindParam("id_value", $todo_id, PDO::PARAM_INT);
+        $stmt->execute();
+        // check if the record was deleted
+        if ($stmt->rowCount() == 1) {
+            echo "Record deleted successfully";
+        } else {
+            echo "Error: failed to delete the record";
+        }
+    }
+}
+
+```
 ---
 
 # Demo: Creating a To Do List Web App
@@ -1164,7 +1320,7 @@ layout: two-cols-header
 - Below is a video tutorial on how to create a RESTful API in PHP for a simple ToDo application. 
 - [Link to the complete source code](https://gitlab.com/cpit405/php-mysql-rest-api)
 
-<Youtube id="ohweQPLhvSs" />
+<Youtube id="ohweQPLhvSs" width="100%" height="70%"/>
 
 
 ---
