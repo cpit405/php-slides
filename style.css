@@ -1,48 +1,64 @@
 :not(pre)>code::before,
 :not(pre)>code::after {
-  content: "";
+	content: "";
 }
 
 table th,
 table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
 }
 
 table th {
-  background-color: #3f6149;
-  color: #fff;
+	background-color: #3f6149;
+	color: #fff;
 }
 
 table tr:nth-child(even) {
-  background-color: #bdbdbd;
-  color: #0c5321;
+	background-color: #bdbdbd;
+	color: #0c5321;
 }
 
 .wh-table table td {
-  background-color: #fff;
-  color: #000;
+	background-color: #fff;
+	color: #000;
 }
 
 .code-section {
-  border: 2px solid #565656;
+	border: 2px solid #565656;
 }
 
 pre.slidev-code {
-  margin-right: 5%;
+	margin-right: 5%;
 }
 
 .images-card img {
-  display: inline;
-  margin: 0px 20px;
+	display: inline;
+	margin: 0px 20px;
 }
 
 pre.output {
-  font-family: monospace;
-  font-size: 14px;
-  padding-left: 10px;
-  margin-right: 5%;
-  background-color: #f8f8f8;
-  color: #474747;
+	font-family: monospace;
+	font-size: 14px;
+	padding-left: 10px;
+	margin-right: 5%;
+	background-color: #f8f8f8;
+	color: #474747;
+}
+
+footer {
+	text-align: center;
+}
+
+.slidev-code {
+	border: #ddd solid 1px;
+}
+
+iframe.jsfiddle {
+	border: #ddd solid 1px;
+}
+
+.toc-list ol {
+	list-style-type: disc;
 }

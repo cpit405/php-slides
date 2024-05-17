@@ -7,7 +7,7 @@ class: text-center
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
-lineNumbers: false
+lineNumbers: true
 # some information about the slides, markdown enabled
 info: | 
     PHP
@@ -21,19 +21,31 @@ css: unocss
 # Make content selectable/copyable
 selectable: true
 # Make slides downloadable as PDF
-download: false
+download: true
+hideInToc: true
 ---
 
-# PHP
 <div class="images-card">
   <img src="/images/php.png" alt="PHP logo">
   <img src="/images/apache.png" alt="Apache logo">
   <img src="/images/mysql.png" alt="MySQL logo">
 </div>
 
+# PHP
+### CPIT-405 Web Applications
+
+
 <div class="absolute left-30px bottom-30px">
-Last update: Fall 2023 &copy; Khalid Alharbi, Ph.D.
+Spring 2024 &copy; Khalid Alharbi, Ph.D.
 </div>
+
+---
+hideInToc: true
+---
+
+# Table of Contents
+
+<Toc columns="2" maxDepth="1" mode="all" class="toc-list"/>
 
 ---
 
@@ -61,7 +73,7 @@ Last update: Fall 2023 &copy; Khalid Alharbi, Ph.D.
 
 ---
 
-# PHP Programming
+## PHP Programming
 
 - PHP is a server-side or backend scripting language
 - PHP Stands for the recursive acronym Hypertext Preprocessor
@@ -90,7 +102,7 @@ Last update: Fall 2023 &copy; Khalid Alharbi, Ph.D.
 
 ---
 
-# PHP Installation on Windows
+## PHP Installation on Windows
 - Download the zip file at [https://windows.php.net/download](https://windows.php.net/download).
 - Extract the ZIP file.
 - Add the extracted directory to the *PATH* environment variable.
@@ -102,7 +114,7 @@ Below is a video tutorial on how to install PHP on Windows 11, configure the PAT
 
 ---
 
-# PHP Installation on macOS
+## PHP Installation on macOS
 
 The easiest way to install PHP on macOS is to use a package manager such as [Homebrew](https://brew.sh/) or [MacPorts](https://www.macports.org/)
 
@@ -123,7 +135,7 @@ sudo port install php
 
 ---
 
-# PHP Installation on Linux
+## PHP Installation on Linux
 
 - Installing PHP on Linux depends on the Linux distribution you are using.
 
@@ -141,7 +153,7 @@ yum install php
 
 ---
 
-# Running PHP from the command line
+## Running PHP from the command line
 
 1. Open your terminal app (e.g., Powershell on Windows or Terminal app on macOS)
 2. Go to the directory/folder where your PHP project is stored at (e.g., `cd C:\path\tp\project/`).
@@ -208,7 +220,7 @@ __index.php__
 layout: two-cols-header
 ---
 
-# PHP `echo` and `var_dump`
+## PHP `echo` and `var_dump`
 
 ::left::
 - `echo` is a language construct in PHP used to output one or more strings. 
@@ -251,7 +263,7 @@ array(3) {
 
 ---
 
-# Variable Scopes
+## Variable Scopes
 - In PHP, functions cannot access global variables without explicit declaration.
 - We can access global variables in one of two ways: 
   1. Use the `global` keyword inside the function.
@@ -303,7 +315,7 @@ array(3) {
 
 ---
 
-# PHP Data Types (II)
+## PHP Data Types (II)
 
 <div class="wh-table">
 
@@ -335,7 +347,7 @@ array(3) {
 
 ---
 
-# Superglobals (II)
+## Superglobals (II)
 
 <div class="wh-table">
 
@@ -351,7 +363,7 @@ array(3) {
 
 ---
 
-# String Functions
+## String Functions
 
 <div class="wh-table">
 
@@ -367,7 +379,7 @@ array(3) {
 
 ---
 
-# Constants
+## Constants
 - Constants are variables whose values can't be changed at runtime.
 - Constants are automatically global and can be used across the entire script.
 - Constant names are case-sensitive
@@ -392,7 +404,7 @@ echo COURSES[0]; // Outputs "CPIT-405"
 
 ---
 
-# Operators (I): Arithmetic Operators
+## Operators (I): Arithmetic Operators
 
 <div class="wh-table">
 
@@ -410,7 +422,7 @@ echo COURSES[0]; // Outputs "CPIT-405"
 
 ---
 
-# Operators (II): String &  Equality Operators
+## Operators (II): String &  Equality Operators
 
 <div class="wh-table">
 
@@ -425,7 +437,7 @@ echo COURSES[0]; // Outputs "CPIT-405"
 
 ---
 
-# Operator (III): Identity and Comparison Operators
+## Operator (III): Identity and Comparison Operators
 
 <div class="wh-table">
 
@@ -440,7 +452,7 @@ echo COURSES[0]; // Outputs "CPIT-405"
 
 ---
 
-# Operator (IV): Logical Operators
+## Operator (IV): Logical Operators
 
 <div class="wh-table">
 
@@ -456,7 +468,7 @@ echo COURSES[0]; // Outputs "CPIT-405"
 
 ---
 
-# String Concatenation Example
+## String Concatenation Example
 
 ```php{monaco}
 <?php
@@ -491,7 +503,7 @@ CPIT405
 
 ---
 
-# Control Statements: `if`…`else`
+## Control Statements: `if`…`else`
 
 ```php
 <?php
@@ -514,7 +526,7 @@ NOT positive
 
 ---
 
-# Control Statements: `switch`
+## Control Statements: `switch`
 
 ```php
 <?php
@@ -542,7 +554,7 @@ You're running macOS
 
 ---
 
-# Control Statements: `for` loop
+## Control Statements: `for` loop
 
 ```php
 <?php
@@ -557,7 +569,7 @@ for ($i = 1; $i <= 10; $i++) {
 ```
 ---
 
-# Control Statements: `while` loop
+## Control Statements: `while` loop
 
 ```php
 <?php
@@ -574,7 +586,7 @@ while ($i <= 5) {
 ```
 ---
 
-# Control Statements: `do`...`while` loop
+## Control Statements: `do`...`while` loop
 
 ```php
 <?php
@@ -591,7 +603,7 @@ do {
 
 ---
 
-# Control Statements: `foreach` loop
+## Control Statements: `foreach` loop
 
 ```php
 <?php
@@ -609,7 +621,7 @@ Lakers <br>Warriors <br>Bulls <br>Celtics <br>
 
 ---
 
-# Control Statements: `break` and `continue`
+## Control Statements: `break` and `continue`
 
 ```php
 <?php
@@ -633,7 +645,7 @@ Lakers <br>Warriors <br>
 
 ---
 
-# Equality check (==) vs Identity check (===)
+## Equality check (==) vs Identity check (===)
 
 In PHP, the `==` operator compares values with type conversion while `===` compares values and types with no type conversion
 
@@ -674,7 +686,7 @@ var_dump($i===true); // bool(false)
 
 ---
 
-# Functions (II): Default Parameters
+## Functions (II): Default Parameters
 - PHP functions may take default parameters.
 - A default parameter is a value that a function uses as a parameter when no argument is provided.
 - If we call the function without passing an argument, the default value will be used.
@@ -719,7 +731,7 @@ Department name: IT
 
 ---
 
-# Arrays (I): Indexed Array
+## Arrays (I): Indexed Array
 
 - An indexed array in PHP is an array with numeric indexes or keys. 
 - Indexed arrays in are zero-indexed, meaning the first element's index is 0.
@@ -737,7 +749,7 @@ NBA Teams: Lakers, Warriors, Bulls, and Celtics.
 
 ---
 
-# Arrays (III): Associative array
+## Arrays (III): Associative array
 - An associative array is an array with string keys rather than numeric keys. 
 - Each key in the associative array is associated with a value, hence the name. 
 - Associative arrays are more human-readable because their data access mechanism is intuitive and straightforward.
@@ -763,7 +775,7 @@ Stephen Curry plays for the Warriors<br>
 
 ---
 
-# Arrays (IV): Multidimensional Arrays
+## Arrays (IV): Multidimensional Arrays
 - A multidimensional array is an array that contains one or more arrays within it.
 - The contained arrays can also contain other arrays, and so on, allowing for multiple levels of depth.
 
@@ -804,7 +816,7 @@ Player: Stephen Curry, Team: Warriors, PPG: 30<br>
 
 ---
 
-# Importing PHP Script Files (II): `include_once` and `require_once`
+## Importing PHP Script Files (II): `include_once` and `require_once`
 
 - We can also import a PHP script using the `include_once` or `require_once` statements:
 
@@ -833,7 +845,7 @@ Player: Stephen Curry, Team: Warriors, PPG: 30<br>
 
 ---
 
-# Form Handling (II): GET vs POST
+## Form Handling (II): GET vs POST
 - Two HTTP methods are often used for submitting and receiving data between the client and the server: HTTP GET and HTTP POST
 
 - **GET**
@@ -847,7 +859,7 @@ Player: Stephen Curry, Team: Warriors, PPG: 30<br>
 
 ---
 
-# Form Handling (II): GET vs POST (Cont.)
+## Form Handling (II): GET vs POST (Cont.)
 
 - **POST**
   - Often used to submit data from the client to the server.
@@ -865,7 +877,7 @@ Player: Stephen Curry, Team: Warriors, PPG: 30<br>
 
 ---
 
-# Form Handling Example
+## Form Handling Example
 
 _index.php_
 
@@ -909,7 +921,7 @@ to complete registration and confirm your email</p>
 
 ---
 
-# Form Validation (client-side)
+## Client-side Form Validation
 
 - Using the HTML validation attributes: `type` and `required`
 
@@ -930,7 +942,7 @@ var uname = document.forms["myForm"]["username"].value;
 
 ---
 
-# Form Validation (server-side I)
+## Server-side Form Validation (I)
 
 - Validation ensure the email is in a valid format. 
 - Sanitization ensures the email cleans the bad characters out of the email.
@@ -952,7 +964,7 @@ if (filter_var($clean_email, FILTER_VALIDATE_EMAIL)) {
 
 ---
 
-# Form Validation (server-side II)
+## Server-side Form Validation (II)
 
 - Forms may be validated using PHP built-in functions:
   - `filter_var()` uses a set of predefined filters
@@ -964,7 +976,7 @@ if (filter_var($clean_email, FILTER_VALIDATE_EMAIL)) {
 
 ---
 
-# What is SQL Injection
+## What is SQL Injection
 
 https://xkcd.com/327/
 
@@ -977,7 +989,7 @@ https://xkcd.com/327/
 
 ---
 
-# Prevention of SQL Injection
+## Prevention of SQL Injection
 
 - Always sanitize and validate any user input before executing SQL code.
 - Use parameterized queries or prepared statements to ensure that user input is not treated as part of the SQL command.
@@ -998,7 +1010,7 @@ https://xkcd.com/327/
 
 ---
 
-# Common Usages of Cookies in PHP
+## Common Usages of Cookies in PHP
 
 - **Session Management**: Cookies are often used to track user sessions. This allows the server to remember the state of a user's interaction with the website over multiple requests.
 
@@ -1011,7 +1023,7 @@ https://xkcd.com/327/
 
 ---
 
-# Cookies example
+## Cookies example
 
 ```php
 <?php
@@ -1028,7 +1040,7 @@ if(isset($_COOKIE["language"])) {
 
 ```
 
-# Deleting a cookie
+## Deleting a cookie
 
 To delete a cookie, you can set the cookie with a past expiration date in seconds
 
@@ -1053,7 +1065,7 @@ setcookie("language", "", time() - 3600, "/");
 
 ---
 
-# Session Example
+## Session Example
 
 ```php
 <?php
@@ -1070,7 +1082,7 @@ echo "Email is: " . $_SESSION["email"];
 ?>
 ```
 
-# Destroying Session
+## Destroying Session
 
 ```php
 <?php
@@ -1086,7 +1098,7 @@ session_destroy();
 layout: section
 ---
 
-# PHP MySQL 
+# PHP and MySQL 
 
 ## CRUD Web Application
 Create, Read, Update, and Delete (CRUD)
@@ -1095,7 +1107,7 @@ Create, Read, Update, and Delete (CRUD)
 
 ---
 
-# Creating a CRUD Web App in PHP
+## Creating a CRUD Web App in PHP
 
 - CRUD stands for Create, Read, Update, and Delete
 - We will create a simple “To Do” app in PHP that communicates with a MySQL database
@@ -1105,7 +1117,7 @@ Create, Read, Update, and Delete (CRUD)
 
 ---
 
-# MariaDB Database installation
+## MariaDB Database installation
 
 ### Windows
 - Download the MariaDB MSI package from the [official MariaDB website](https://mariadb.org/download/) and follow the instructions in the installation wizard.
@@ -1121,7 +1133,7 @@ Create, Read, Update, and Delete (CRUD)
 
 ---
 
-# Connect to MariaDB from Terminal
+## Connect to MariaDB from Terminal
 
 
 - Open command-line client (Command Prompt or PowerShell on Windows or Terminal application on macOS and Linux).
@@ -1133,7 +1145,7 @@ Create, Read, Update, and Delete (CRUD)
 
 ---
 
-# Create the Database
+## Create the Database
 
 ```sql
 CREATE DATABASE todo_db;
@@ -1153,7 +1165,7 @@ INSERT INTO tasks(task, date_added) VALUES ('Call Mom', NOW());
 
 ---
 
-# PHP PDO
+## PHP PDO
 
 - PDO (PHP Data Objects) is a database abstraction layer for PHP.
 - The PDO class represents a connection between PHP and a database server.
@@ -1166,7 +1178,7 @@ INSERT INTO tasks(task, date_added) VALUES ('Call Mom', NOW());
 
 ---
 
-# Connect to the database
+## Connect to the database
 - Connections are established by creating instances of the PDO class.
 - The constructor accepts parameters for specifying the database source (known as the dsn) and optionally for the username and password.
 
@@ -1190,7 +1202,7 @@ function db_connection($host, $port, $dbname, $username, $password)
 ---
 
 
-# Insert Data
+## Insert Data
 
 
 ```php
@@ -1220,7 +1232,7 @@ function insert_todo($todo_task, $todo_date)
 
 ---
 
-# Select Data
+## Select Data
 
 ```php
 function select_all_todos()
@@ -1240,7 +1252,7 @@ function select_all_todos()
 
 ---
 
-# Update Data
+## Update Data
 
 
 ```php
@@ -1266,7 +1278,7 @@ function update_todo($todo_id, $todo_description, $todo_date, $todo_done){
 
 ---
 
-# Delete Data
+## Delete Data
 
 ```php
 
@@ -1297,7 +1309,7 @@ https://gitlab.com/kalharbi/todo-php-mysql
 ---
 layout: two-cols-header
 ---
-# Embedding PHP in HTML is bad!!
+## Embedding PHP in HTML is bad!!
 
 ::left::
 
@@ -1314,7 +1326,7 @@ layout: two-cols-header
 ---
 
 
-# Working with APIs
+# Working with APIs: Create a CRUD REST API
 
 ### Create a CRUD REST API with PHP & MariaDB
 - Below is a video tutorial on how to create a RESTful API in PHP for a simple ToDo application. 
