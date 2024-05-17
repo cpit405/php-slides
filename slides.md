@@ -47,17 +47,6 @@ hideInToc: true
 
 <Toc columns="2" maxDepth="1" mode="all" class="toc-list"/>
 
----
-
-# Outline
-
-- Server-side scripting
-- PHP Syntax and data types
-- Importing PHP script files
-- Form handling and validation
-- Working with databases
-- Creating a CRUD web app
-- Creating a CRUD RESTful API
 
 ---
 
@@ -1334,6 +1323,16 @@ layout: two-cols-header
 
 <Youtube id="ohweQPLhvSs" width="100%" height="70%"/>
 
-
 ---
 
+## Wrapping up
+<br> 
+
+- We have learned about the following topics:
+  - Server-side scripting
+  - PHP Syntax and data types
+  - Importing PHP script files
+  - Form handling and validation
+  - Working with databases
+  - Creating a CRUD web app
+  - Creating a CRUD RESTful API
