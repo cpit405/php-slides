@@ -3,26 +3,55 @@
 	content: "";
 }
 
+.slidev-layout code {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@media (prefers-color-scheme: no-preference) {
+	:root {
+		--th-background-color: #3f6149;
+		--th-text-color: #fff;
+		--tr-background-color: #bdbdbd;
+		--tr-text-color: #0c5321;
+		--border-color: #000;
+		--wh-table-background-color: #fff;
+		--wh-table-text-color: #000;
+	}
+}
+
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--th-background-color: #000;
+		--th-text-color: #fff;
+		--tr-background-color: #000;
+		--tr-text-color: #fff;
+		--border-color: #fff;
+		--wh-table-background-color: #000;
+		--wh-table-text-color: #fff;
+	}
+}
+
 table th,
 table td {
-	border: 1px solid #ddd;
+	border: 1px solid var(--border-color);
 	padding: 8px;
 	text-align: left;
 }
 
 table th {
-	background-color: #3f6149;
-	color: #fff;
+	background-color: var(--th-background-color);
+	color: var(--th-text-color);
 }
 
 table tr:nth-child(even) {
-	background-color: #bdbdbd;
-	color: #0c5321;
+	background-color: var(--tr-background-color);
+	color: var(--tr-text-color);
 }
 
 .wh-table table td {
-	background-color: #fff;
-	color: #000;
+	background-color: var(--wh-table-background-color);
+	color: var(--wh-table-text-color);
 }
 
 .code-section {
